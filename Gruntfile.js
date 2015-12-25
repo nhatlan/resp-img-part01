@@ -5,7 +5,7 @@
   "grunt clean" removes the images directory
   "grunt responsive_images" re-processes images without removing the old ones
 */
-
+'use strict'
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -14,17 +14,18 @@ module.exports = function(grunt) {
         options: {
           engine: 'im',
           sizes: [{
-        width: 320,
-        height: 240
-      },{
-        name: 'medium',
-        width: 640
-      },{
-        name: "large",
-        width: 1024,
-        suffix: "_x2",
-        quality: 0.6
-      }]
+            name:"small",
+            width: 320,
+          },
+          {
+            name:"medium",
+            width: 640
+          },{
+            name:"large", 
+            width: 1024, 
+            suffix: "_2x"
+          }
+          ]
         },
 
         /*
@@ -33,7 +34,7 @@ module.exports = function(grunt) {
         */
         files: [{
           expand: true,
-          src: ['**.{gif,jpg,png}'],
+          src: ['*.{gif,jpg,png}'],
           cwd: 'images_src/',
           dest: 'images/'
         }]
@@ -72,6 +73,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-mkdir');
-  grunt.registerTask('default', ['responsive_images']);
+  grunt.registerTask('default', ['clean', 'mkdir', 'copy', 'responsive_images']);
 
 };
